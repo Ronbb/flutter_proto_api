@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+import "annotations.proto";
+
+//
+service Sdk {
+  //
+  rpc Base(BaseRequest) returns (BaseResponse) {
+    option (api) = {
+      method : API_METHOD_ANY,
+      uri : "/base"
+    };
+  }
+}
+
+//
+message BaseRequest {
+  //
+}
+
+//
+message BaseResponse {
+  //
+}
