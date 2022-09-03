@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_proto_api/proto.dart';
+import 'package:proto/proto.dart';
 
 extension ApiMethodChip on ApiMethod {
   static const _textMap = <ApiMethod, String>{

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_proto_api/proto.dart' as pb;
+import 'package:proto/proto.dart' as pb;
 
 export 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,7 +38,7 @@ class GlobalRepository {
     service.mergeFromBuffer(pb.sdkServiceDescriptor, registry);
     apis = List.of(service.method.map(
       (m) => Api._(
-        api: (m.options.getExtension(pb.Annotations.api) as pb.Api)..freeze(),
+        api: (m.options.getExtension(pb.Annotations.api) as pb.ApiConfig)..freeze(),
         method: m..freeze(),
       ),
     ));

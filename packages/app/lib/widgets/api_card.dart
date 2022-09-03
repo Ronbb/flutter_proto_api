@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proto_api/bloc/api_bloc.dart';
-import 'package:flutter_proto_api/proto.dart';
+import 'package:proto/proto.dart';
 import 'package:flutter_proto_api/utils.dart';
 
 class ApiCard extends StatelessWidget {

@@ -13,15 +13,15 @@ import 'annotations.pbenum.dart';
 
 export 'annotations.pbenum.dart';
 
-class Api extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Api', createEmptyInstance: create)
+class ApiConfig extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiConfig', createEmptyInstance: create)
     ..e<ApiMethod>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'method', $pb.PbFieldType.OE, defaultOrMaker: ApiMethod.API_METHOD_UNSPECIFIED, valueOf: ApiMethod.valueOf, enumValues: ApiMethod.values)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uri')
     ..hasRequiredFields = false
   ;
 
-  Api._() : super();
-  factory Api({
+  ApiConfig._() : super();
+  factory ApiConfig({
     ApiMethod? method,
     $core.String? uri,
   }) {
@@ -34,26 +34,26 @@ class Api extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory Api.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory Api.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ApiConfig.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ApiConfig.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  Api clone() => Api()..mergeFromMessage(this);
+  ApiConfig clone() => ApiConfig()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  Api copyWith(void Function(Api) updates) => super.copyWith((message) => updates(message as Api)) as Api; // ignore: deprecated_member_use
+  ApiConfig copyWith(void Function(ApiConfig) updates) => super.copyWith((message) => updates(message as ApiConfig)) as ApiConfig; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static Api create() => Api._();
-  Api createEmptyInstance() => create();
-  static $pb.PbList<Api> createRepeated() => $pb.PbList<Api>();
+  static ApiConfig create() => ApiConfig._();
+  ApiConfig createEmptyInstance() => create();
+  static $pb.PbList<ApiConfig> createRepeated() => $pb.PbList<ApiConfig>();
   @$core.pragma('dart2js:noInline')
-  static Api getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Api>(create);
-  static Api? _defaultInstance;
+  static ApiConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ApiConfig>(create);
+  static ApiConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
   ApiMethod get method => $_getN(0);
@@ -75,7 +75,7 @@ class Api extends $pb.GeneratedMessage {
 }
 
 class Annotations {
-  static final api = $pb.Extension<Api>(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'google.protobuf.MethodOptions', const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'api', 72295728, $pb.PbFieldType.OM, defaultOrMaker: Api.getDefault, subBuilder: Api.create);
+  static final api = $pb.Extension<ApiConfig>(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'google.protobuf.MethodOptions', const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'api', 72295728, $pb.PbFieldType.OM, defaultOrMaker: ApiConfig.getDefault, subBuilder: ApiConfig.create);
   static void registerAllExtensions($pb.ExtensionRegistry registry) {
     registry.add(api);
   }

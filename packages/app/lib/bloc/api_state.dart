@@ -2,12 +2,12 @@ part of 'api_bloc.dart';
 
 class Api extends Equatable {
   const Api._({
-    required pb.Api api,
+    required pb.ApiConfig api,
     required pb.MethodDescriptorProto method,
   })  : _api = api,
         _method = method;
 
-  final pb.Api _api;
+  final pb.ApiConfig _api;
 
   final pb.MethodDescriptorProto _method;
 

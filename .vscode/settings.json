@@ -12,8 +12,8 @@
     "compile_on_save": true,
     "options": [
       "--proto_path=${workspaceRoot}/proto",
-      "--plugin=${workspaceRoot}/packages/protoc_api/bin/protoc_gen_dart_api",
-      "--dart-api_out=${workspaceRoot}/packages/proto/lib/src",
+      // "--plugin=${workspaceRoot}/packages/protoc_api/bin/protoc_gen_dart_api",
+      // "--dart-api_out=${workspaceRoot}/packages/proto/lib/src",
       "--dart_out=${workspaceRoot}/packages/proto/lib/src"
     ]
   }

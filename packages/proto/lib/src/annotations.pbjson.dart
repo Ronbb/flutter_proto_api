@@ -19,14 +19,14 @@ const ApiMethod$json = const {
 
 /// Descriptor for `ApiMethod`. Decode as a `google.protobuf.EnumDescriptorProto`.
 final $typed_data.Uint8List apiMethodDescriptor = $convert.base64Decode('CglBcGlNZXRob2QSGgoWQVBJX01FVEhPRF9VTlNQRUNJRklFRBAAEhIKDkFQSV9NRVRIT0RfQU5ZEAE=');
-@$core.Deprecated('Use apiDescriptor instead')
-const Api$json = const {
-  '1': 'Api',
+@$core.Deprecated('Use apiConfigDescriptor instead')
+const ApiConfig$json = const {
+  '1': 'ApiConfig',
   '2': const [
     const {'1': 'method', '3': 1, '4': 1, '5': 14, '6': '.ApiMethod', '10': 'method'},
     const {'1': 'uri', '3': 2, '4': 1, '5': 9, '10': 'uri'},
   ],
 };
 
-/// Descriptor for `Api`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List apiDescriptor = $convert.base64Decode('CgNBcGkSIgoGbWV0aG9kGAEgASgOMgouQXBpTWV0aG9kUgZtZXRob2QSEAoDdXJpGAIgASgJUgN1cmk=');
+/// Descriptor for `ApiConfig`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List apiConfigDescriptor = $convert.base64Decode('CglBcGlDb25maWcSIgoGbWV0aG9kGAEgASgOMgouQXBpTWV0aG9kUgZtZXRob2QSEAoDdXJpGAIgASgJUgN1cmk=');
