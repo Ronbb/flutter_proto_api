@@ -4,7 +4,7 @@ import "google/protobuf/descriptor.proto";
 
 extend google.protobuf.MethodOptions {
   //
-  Api api = 72295728;
+  ApiConfig api = 72295728;
 }
 
 //
@@ -16,7 +16,7 @@ enum ApiMethod {
 }
 
 //
-message Api {
+message ApiConfig {
   //
   ApiMethod method = 1;
   //
