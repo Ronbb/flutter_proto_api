@@ -15,4 +15,7 @@ export 'src/plugin.pbenum.dart';
 export 'src/plugin.pbjson.dart';
 export 'src/plugin.pbserver.dart';
 
+export 'src/generated.pbapi.dart';
+
 export 'package:protobuf/protobuf.dart';
+export 'package:fixnum/fixnum.dart';

@@ -5,46 +5,59 @@ import 'package:proto/proto.dart' as pb;
 
 export 'package:flutter_bloc/flutter_bloc.dart';
 
-part 'api_bloc.g.dart';
+// part 'api_bloc.g.dart';
 part 'api_event.dart';
 part 'api_state.dart';
 
 class ApiBloc extends Bloc<ApiEvent, ApiState> {
-  ApiBloc(Api api)
-      : super(
-          ApiState.initial(api),
-        ) {
+  ApiBloc(this.api, this.serviceBloc) : super(const ApiState.initial()) {
     //
   }
+
+  final ServiceBloc serviceBloc;
+
+  final pb.ApiDescriptor api;
+}
+
+class ServiceBloc extends Bloc<ServiceEvent, ServiceState> {
+  ServiceBloc(this.service, this.globalBloc) : super(const ServiceState()) {
+    final apiDescriptors = service.apis;
+    apis = List.of(apiDescriptors.map(
+      (api) => ApiBloc(api, this),
+    ));
+  }
+
+  final GlobalBloc globalBloc;
+
+  final pb.ApiServiceDescriptor service;
+
+  late final List<ApiBloc> apis;
 }
 
 class GlobalBloc extends Bloc<GlobalEvent, GlobalState> {
-  GlobalBloc(GlobalRepository repository) : super(const GlobalState()) {
-    apiBlocs = Map.fromIterables(
-      repository.apis,
-      repository.apis.map(
-        (api) => ApiBloc(api),
+  GlobalBloc(this.globalRepository) : super(const GlobalState()) {
+    final repository = globalRepository.repository;
+    final serviceDescriptors = repository.services;
+    services = Map.fromIterables(
+      serviceDescriptors.map((service) => service.name),
+      serviceDescriptors.map(
+        (service) => ServiceBloc(service, this),
       ),
     );
   }
 
-  late final Map<Api, ApiBloc> apiBlocs;
+  final GlobalRepository globalRepository;
+
+  late final Map<String, ServiceBloc> services;
 }
 
 class GlobalRepository {
   GlobalRepository() {
-    pb.Annotations.registerAllExtensions(registry);
-    final service = pb.ServiceDescriptorProto();
-    service.mergeFromBuffer(pb.sdkServiceDescriptor, registry);
-    apis = List.of(service.method.map(
-      (m) => Api._(
-        api: (m.options.getExtension(pb.Annotations.api) as pb.ApiConfig)..freeze(),
-        method: m..freeze(),
-      ),
-    ));
+    repository = pb.ApiRepository();
+    repository.mergeFromBuffer(pb.apiRepository, registry);
   }
 
   final registry = pb.ExtensionRegistry();
 
-  late final List<Api> apis;
+  late final pb.ApiRepository repository;
 }

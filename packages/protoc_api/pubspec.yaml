@@ -10,6 +10,7 @@ environment:
 dependencies:
   proto:
     path: ../proto
+  equatable: ^2.0.5
 
 dev_dependencies:
   lints: ^2.0.0

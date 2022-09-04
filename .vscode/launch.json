@@ -1,0 +1,42 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "flutter_proto_api",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "app",
+      "cwd": "packages/app",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "app (profile mode)",
+      "cwd": "packages/app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile"
+    },
+    {
+      "name": "app (release mode)",
+      "cwd": "packages/app",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release"
+    },
+    {
+      "name": "proto",
+      "cwd": "packages/proto",
+      "request": "launch",
+      "type": "dart"
+    },
+    {
+      "name": "protoc_api",
+      "cwd": "packages/protoc_api",
+      "request": "launch",
+      "type": "dart"
+    }
+  ]
+}

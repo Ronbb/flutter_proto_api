@@ -2,13 +2,34 @@ syntax = "proto3";
 
 import "annotations.proto";
 
-//
+// SDK service
 service Sdk {
   //
+  option (service) = {
+    prefix : "/prefix"
+  };
+
+  // Base api
   rpc Base(BaseRequest) returns (BaseResponse) {
     option (api) = {
-      method : API_METHOD_ANY,
+      methods : API_METHOD_GET,
       uri : "/base"
+    };
+  }
+
+  // Just a test api
+  rpc Test(TestRequest) returns (TestResponse) {
+    option (api) = {
+      uri : "/test"
+    };
+  }
+
+  // Just a streaming-test api
+  rpc TestStream(stream TestRequest) returns (stream TestResponse) {
+    option (api) = {
+      methods : API_METHOD_PATCH
+      methods : API_METHOD_PUT
+      uri : "/test/stream"
     };
   }
 }
@@ -16,9 +37,31 @@ service Sdk {
 //
 message BaseRequest {
   //
+  message Nested {
+    // x
+  }
 }
 
 //
 message BaseResponse {
+  //
+}
+
+// this is a test request
+// has a nested message inside
+message TestRequest {
+  // a simple field
+  // a comment
+  Nested nested = 1; //  a comment behind
+
+  //
+  message Nested {
+    //
+    string content = 1;
+  }
+}
+
+// this is a test response
+message TestResponse {
   //
 }

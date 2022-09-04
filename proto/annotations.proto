@@ -2,23 +2,127 @@ syntax = "proto3";
 
 import "descriptor.proto";
 
+extend google.protobuf.ServiceOptions {
+  //
+  ServiceConfig service = 524288;
+}
+
 extend google.protobuf.MethodOptions {
   //
-  ApiConfig api = 72295728;
+  ApiConfig api = 524289;
 }
 
 //
 enum ApiMethod {
-  //
+  // resolve as all methods
   API_METHOD_UNSPECIFIED = 0;
-  //
-  API_METHOD_ANY = 1;
+  // GET
+  API_METHOD_GET = 1;
+  // HEAD
+  API_METHOD_HEAD = 2;
+  // POST
+  API_METHOD_POST = 3;
+  // PUT
+  API_METHOD_PUT = 4;
+  // DELETE
+  API_METHOD_DELETE = 5;
+  // CONNECT
+  API_METHOD_CONNECT = 6;
+  // OPTIONS
+  API_METHOD_OPTIONS = 7;
+  // TRACE
+  API_METHOD_TRACE = 8;
+  // PATCH
+  API_METHOD_PATCH = 9;
 }
 
 //
 message ApiConfig {
   //
-  ApiMethod method = 1;
+  repeated ApiMethod methods = 1;
   //
   string uri = 2;
+}
+
+//
+message ServiceConfig {
+  //
+  string prefix = 1;
+}
+
+//
+message ApiDescriptor {
+  //
+  string uri = 1;
+  //
+  string comment = 2;
+  //
+  repeated ApiMethod methods = 3;
+  //
+  bool is_client_streaming = 4;
+  //
+  bool is_server_streaming = 5;
+  //
+  string request = 6;
+  //
+  string response = 7;
+}
+
+//
+message ApiMessageDescriptor {
+  //
+  string name = 1;
+  //
+  string comment = 2;
+  //
+  repeated ApiFieldDescriptor fields = 3;
+}
+
+//
+message ApiFieldDescriptor {
+  //
+  string comment = 1;
+  //
+  google.protobuf.FieldDescriptorProto descriptor = 2;
+}
+
+//
+message ApiEnumDescriptor {
+  //
+  string name = 1;
+  //
+  string comment = 2;
+  //
+  repeated ApiEnumValueDescriptor values = 3;
+}
+
+message ApiEnumValueDescriptor {
+  //
+  string comment = 1;
+  //
+  google.protobuf.EnumValueDescriptorProto descriptor = 2;
+}
+
+//
+message ApiServiceDescriptor {
+  //
+  string name = 1;
+  //
+  string comment = 2;
+  //
+  string prefix = 3;
+  //
+  repeated ApiDescriptor apis = 4;
+}
+
+//
+message ApiRepository {
+  //
+  repeated ApiServiceDescriptor services = 1;
+  // all messages/fields/enums/enum values comments
+  map<string, string> comments = 2;
+  // messages
+  map<string, ApiMessageDescriptor> messages = 3;
+  // enums
+  map<string, ApiEnumDescriptor> enums = 4;
 }

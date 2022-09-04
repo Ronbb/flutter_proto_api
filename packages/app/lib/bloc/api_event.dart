@@ -7,6 +7,13 @@ abstract class ApiEvent extends Equatable {
   List<Object> get props => [];
 }
 
+abstract class ServiceEvent extends Equatable {
+  const ServiceEvent();
+
+  @override
+  List<Object> get props => [];
+}
+
 abstract class GlobalEvent extends Equatable {
   const GlobalEvent();
 

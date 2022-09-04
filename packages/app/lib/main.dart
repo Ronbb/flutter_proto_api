@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proto_api/bloc/api_bloc.dart';
 import 'package:flutter_proto_api/widgets/api_card.dart';
+import 'package:flutter_proto_api/widgets/sliver_service_header.dart';
 
 void main() {
   runApp(const App());
@@ -43,20 +44,49 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final apiBlocs = context.read<GlobalBloc>().apiBlocs.entries.toList();
+    final global = context.read<GlobalBloc>();
+
+    final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Proto Api'),
-      ),
-      body: ListView.builder(
-        itemCount: apiBlocs.length,
-        itemBuilder: (context, index) {
-          return BlocProvider.value(
-            value: apiBlocs[index].value,
-            child: const ApiCard(),
-          );
-        },
+      body: CustomScrollView(
+        slivers: [
+          const SliverAppBar(
+            title: Text('Proto Api'),
+          ),
+          for (final entry in global.services.entries) ...[
+            SliverPersistentHeader(
+              delegate: SliverServiceHeader(
+                title: Text(entry.key),
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 4.0,
+                horizontal: 16.0,
+              ),
+              sliver: SliverToBoxAdapter(
+                child: Text(
+                  entry.value.service.comment.trim(),
+                  style: theme.textTheme.bodySmall?.copyWith(
+                    color: theme.hintColor,
+                  ),
+                ),
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  for (final api in entry.value.apis)
+                    BlocProvider.value(
+                      value: api,
+                      child: const ApiCard(),
+                    ),
+                ],
+              ),
+            ),
+          ],
+        ],
       ),
     );
   }
