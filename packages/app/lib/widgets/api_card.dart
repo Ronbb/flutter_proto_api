@@ -49,8 +49,6 @@ class ApiCard extends StatelessWidget {
     List<ApiMethod> methods,
     bool isStreaming,
   ) sync* {
-    final theme = Theme.of(context);
-
     if (isStreaming) {
       final color = Colors.lightGreen.withOpacity(0.64);
       yield Chip(label: const Text('WebSocket'), backgroundColor: color);
