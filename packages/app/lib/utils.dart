@@ -21,22 +21,22 @@ extension ApiMethodChip on ApiMethod {
     return _textMap[this] ?? _unknownText;
   }
 
-  static final _colorMap = <ApiMethod, Color>{
-    ApiMethod.API_METHOD_UNSPECIFIED: Colors.green[400]!,
-    ApiMethod.API_METHOD_GET: Colors.indigo[400]!,
-    ApiMethod.API_METHOD_HEAD: Colors.orange[400]!,
-    ApiMethod.API_METHOD_POST: Colors.blue[400]!,
-    ApiMethod.API_METHOD_PUT: Colors.pink[400]!,
-    ApiMethod.API_METHOD_DELETE: Colors.red[400]!,
-    ApiMethod.API_METHOD_CONNECT: Colors.amber[400]!,
-    ApiMethod.API_METHOD_OPTIONS: Colors.cyan[400]!,
-    ApiMethod.API_METHOD_TRACE: Colors.purple[400]!,
-    ApiMethod.API_METHOD_PATCH: Colors.teal[400]!,
+  static const _colorMap = <ApiMethod, Color>{
+    ApiMethod.API_METHOD_UNSPECIFIED: Colors.green,
+    ApiMethod.API_METHOD_GET: Colors.indigo,
+    ApiMethod.API_METHOD_HEAD: Colors.orange,
+    ApiMethod.API_METHOD_POST: Colors.blue,
+    ApiMethod.API_METHOD_PUT: Colors.pink,
+    ApiMethod.API_METHOD_DELETE: Colors.red,
+    ApiMethod.API_METHOD_CONNECT: Colors.amber,
+    ApiMethod.API_METHOD_OPTIONS: Colors.cyan,
+    ApiMethod.API_METHOD_TRACE: Colors.purple,
+    ApiMethod.API_METHOD_PATCH: Colors.teal,
   };
 
   static const _unknownColor = Colors.grey;
 
   Color get color {
-    return _colorMap[this] ?? _unknownColor;
+    return (_colorMap[this] ?? _unknownColor).withOpacity(0.64);
   }
 }
