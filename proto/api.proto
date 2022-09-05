@@ -54,6 +54,18 @@ message TestRequest {
   // a comment
   Nested nested = 1; //  a comment behind
 
+  // repeated string
+  repeated string strings = 2;
+
+  // map string to int32
+  map<string, int32> string_to_int = 3;
+
+  // repeated Nested
+  repeated Nested nesteds = 4;
+
+  // map string to Nested
+  map<string, Nested> string_to_nesteds = 5;
+
   //
   message Nested {
     //

@@ -69,10 +69,43 @@ class CodeGenerator {
         // insert comment
         repository.comments[field.fullName] = field.comment;
 
+        // build field type
+
+        ApiFieldType buildType(FieldDescriptorProto descriptor) {
+          final type = ApiFieldType(
+            basicType: ApiFieldType_BasicType(
+              type: descriptor.type.value,
+              typeName: descriptor.typeName,
+              isRepeated:
+                  descriptor.label == FieldDescriptorProto_Label.LABEL_REPEATED,
+            ),
+          );
+          if (descriptor.type == FieldDescriptorProto_Type.TYPE_MESSAGE &&
+              descriptor.label == FieldDescriptorProto_Label.LABEL_REPEATED) {
+            final messageContext = messages[field.descriptor.typeName];
+            if (messageContext == null) {
+              throw Exception('Message ${field.descriptor.typeName} not found');
+            }
+            if (messageContext.descriptor.options.mapEntry) {
+              type.mapType = ApiMapType(
+                key: buildType(
+                  messageContext.descriptor.field[0],
+                ),
+                value: buildType(
+                  messageContext.descriptor.field[1],
+                ),
+              );
+            }
+          }
+
+          return type;
+        }
+
         // insert field
         apiMessage.fields.add(ApiFieldDescriptor(
           comment: field.comment,
           descriptor: field.descriptor,
+          type: buildType(field.descriptor),
         ));
       }
 

@@ -3,7 +3,7 @@
 //  source: annotations.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields,deprecated_member_use_from_same_package
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,deprecated_member_use_from_same_package,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
 import 'dart:convert' as $convert;
@@ -82,11 +82,48 @@ const ApiFieldDescriptor$json = const {
   '2': const [
     const {'1': 'comment', '3': 1, '4': 1, '5': 9, '10': 'comment'},
     const {'1': 'descriptor', '3': 2, '4': 1, '5': 11, '6': '.google.protobuf.FieldDescriptorProto', '10': 'descriptor'},
+    const {'1': 'type', '3': 3, '4': 1, '5': 11, '6': '.ApiFieldType', '10': 'type'},
   ],
 };
 
 /// Descriptor for `ApiFieldDescriptor`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List apiFieldDescriptorDescriptor = $convert.base64Decode('ChJBcGlGaWVsZERlc2NyaXB0b3ISGAoHY29tbWVudBgBIAEoCVIHY29tbWVudBJFCgpkZXNjcmlwdG9yGAIgASgLMiUuZ29vZ2xlLnByb3RvYnVmLkZpZWxkRGVzY3JpcHRvclByb3RvUgpkZXNjcmlwdG9y');
+final $typed_data.Uint8List apiFieldDescriptorDescriptor = $convert.base64Decode('ChJBcGlGaWVsZERlc2NyaXB0b3ISGAoHY29tbWVudBgBIAEoCVIHY29tbWVudBJFCgpkZXNjcmlwdG9yGAIgASgLMiUuZ29vZ2xlLnByb3RvYnVmLkZpZWxkRGVzY3JpcHRvclByb3RvUgpkZXNjcmlwdG9yEiEKBHR5cGUYAyABKAsyDS5BcGlGaWVsZFR5cGVSBHR5cGU=');
+@$core.Deprecated('Use apiFieldTypeDescriptor instead')
+const ApiFieldType$json = const {
+  '1': 'ApiFieldType',
+  '2': const [
+    const {'1': 'basic_type', '3': 1, '4': 1, '5': 11, '6': '.ApiFieldType.BasicType', '9': 0, '10': 'basicType'},
+    const {'1': 'map_type', '3': 2, '4': 1, '5': 11, '6': '.ApiMapType', '9': 0, '10': 'mapType'},
+  ],
+  '3': const [ApiFieldType_BasicType$json],
+  '8': const [
+    const {'1': 'type'},
+  ],
+};
+
+@$core.Deprecated('Use apiFieldTypeDescriptor instead')
+const ApiFieldType_BasicType$json = const {
+  '1': 'BasicType',
+  '2': const [
+    const {'1': 'type', '3': 1, '4': 1, '5': 5, '10': 'type'},
+    const {'1': 'type_name', '3': 2, '4': 1, '5': 9, '10': 'typeName'},
+    const {'1': 'is_repeated', '3': 3, '4': 1, '5': 8, '10': 'isRepeated'},
+  ],
+};
+
+/// Descriptor for `ApiFieldType`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List apiFieldTypeDescriptor = $convert.base64Decode('CgxBcGlGaWVsZFR5cGUSOAoKYmFzaWNfdHlwZRgBIAEoCzIXLkFwaUZpZWxkVHlwZS5CYXNpY1R5cGVIAFIJYmFzaWNUeXBlEigKCG1hcF90eXBlGAIgASgLMgsuQXBpTWFwVHlwZUgAUgdtYXBUeXBlGl0KCUJhc2ljVHlwZRISCgR0eXBlGAEgASgFUgR0eXBlEhsKCXR5cGVfbmFtZRgCIAEoCVIIdHlwZU5hbWUSHwoLaXNfcmVwZWF0ZWQYAyABKAhSCmlzUmVwZWF0ZWRCBgoEdHlwZQ==');
+@$core.Deprecated('Use apiMapTypeDescriptor instead')
+const ApiMapType$json = const {
+  '1': 'ApiMapType',
+  '2': const [
+    const {'1': 'key', '3': 1, '4': 1, '5': 11, '6': '.ApiFieldType', '10': 'key'},
+    const {'1': 'value', '3': 2, '4': 1, '5': 11, '6': '.ApiFieldType', '10': 'value'},
+  ],
+};
+
+/// Descriptor for `ApiMapType`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List apiMapTypeDescriptor = $convert.base64Decode('CgpBcGlNYXBUeXBlEh8KA2tleRgBIAEoCzINLkFwaUZpZWxkVHlwZVIDa2V5EiMKBXZhbHVlGAIgASgLMg0uQXBpRmllbGRUeXBlUgV2YWx1ZQ==');
 @$core.Deprecated('Use apiEnumDescriptorDescriptor instead')
 const ApiEnumDescriptor$json = const {
   '1': 'ApiEnumDescriptor',

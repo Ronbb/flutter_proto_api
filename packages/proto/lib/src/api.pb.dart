@@ -147,16 +147,36 @@ class TestRequest_Nested extends $pb.GeneratedMessage {
 class TestRequest extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'TestRequest', createEmptyInstance: create)
     ..aOM<TestRequest_Nested>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nested', subBuilder: TestRequest_Nested.create)
+    ..pPS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'strings')
+    ..m<$core.String, $core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stringToInt', entryClassName: 'TestRequest.StringToIntEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.O3)
+    ..pc<TestRequest_Nested>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'nesteds', $pb.PbFieldType.PM, subBuilder: TestRequest_Nested.create)
+    ..m<$core.String, TestRequest_Nested>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'stringToNesteds', entryClassName: 'TestRequest.StringToNestedsEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: TestRequest_Nested.create)
     ..hasRequiredFields = false
   ;
 
   TestRequest._() : super();
   factory TestRequest({
     TestRequest_Nested? nested,
+    $core.Iterable<$core.String>? strings,
+    $core.Map<$core.String, $core.int>? stringToInt,
+    $core.Iterable<TestRequest_Nested>? nesteds,
+    $core.Map<$core.String, TestRequest_Nested>? stringToNesteds,
   }) {
     final _result = create();
     if (nested != null) {
       _result.nested = nested;
+    }
+    if (strings != null) {
+      _result.strings.addAll(strings);
+    }
+    if (stringToInt != null) {
+      _result.stringToInt.addAll(stringToInt);
+    }
+    if (nesteds != null) {
+      _result.nesteds.addAll(nesteds);
+    }
+    if (stringToNesteds != null) {
+      _result.stringToNesteds.addAll(stringToNesteds);
     }
     return _result;
   }
@@ -191,6 +211,18 @@ class TestRequest extends $pb.GeneratedMessage {
   void clearNested() => clearField(1);
   @$pb.TagNumber(1)
   TestRequest_Nested ensureNested() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  $core.List<$core.String> get strings => $_getList(1);
+
+  @$pb.TagNumber(3)
+  $core.Map<$core.String, $core.int> get stringToInt => $_getMap(2);
+
+  @$pb.TagNumber(4)
+  $core.List<TestRequest_Nested> get nesteds => $_getList(3);
+
+  @$pb.TagNumber(5)
+  $core.Map<$core.String, TestRequest_Nested> get stringToNesteds => $_getMap(4);
 }
 
 class TestResponse extends $pb.GeneratedMessage {

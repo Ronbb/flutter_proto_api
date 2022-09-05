@@ -214,7 +214,14 @@ class FileContext extends Context {
   final GeneratorContext parent;
 
   @override
-  String get name => descriptor.package;
+  String get name {
+    final name = descriptor.package;
+    if (name.isEmpty) {
+      return '';
+    } else {
+      return '.$name';
+    }
+  }
 
   @override
   final List<int>? index = null;

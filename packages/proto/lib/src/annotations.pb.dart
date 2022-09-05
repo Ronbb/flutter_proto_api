@@ -3,7 +3,7 @@
 //  source: annotations.proto
 //
 // @dart = 2.12
-// ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
+// ignore_for_file: annotate_overrides,camel_case_types,constant_identifier_names,directives_ordering,library_prefixes,non_constant_identifier_names,prefer_final_fields,return_of_invalid_type,unnecessary_const,unnecessary_import,unnecessary_this,unused_import,unused_shown_name
 
 import 'dart:core' as $core;
 
@@ -17,7 +17,7 @@ export 'annotations.pbenum.dart';
 
 class ApiConfig extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiConfig', createEmptyInstance: create)
-    ..pc<ApiMethod>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'methods', $pb.PbFieldType.PE, valueOf: ApiMethod.valueOf, enumValues: ApiMethod.values)
+    ..pc<ApiMethod>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'methods', $pb.PbFieldType.KE, valueOf: ApiMethod.valueOf, enumValues: ApiMethod.values, defaultEnumValue: ApiMethod.API_METHOD_UNSPECIFIED)
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uri')
     ..hasRequiredFields = false
   ;
@@ -121,7 +121,7 @@ class ApiDescriptor extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiDescriptor', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'uri')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'comment')
-    ..pc<ApiMethod>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'methods', $pb.PbFieldType.PE, valueOf: ApiMethod.valueOf, enumValues: ApiMethod.values)
+    ..pc<ApiMethod>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'methods', $pb.PbFieldType.KE, valueOf: ApiMethod.valueOf, enumValues: ApiMethod.values, defaultEnumValue: ApiMethod.API_METHOD_UNSPECIFIED)
     ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isClientStreaming')
     ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isServerStreaming')
     ..aOS(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'request')
@@ -314,12 +314,14 @@ class ApiFieldDescriptor extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiFieldDescriptor', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'comment')
     ..aOM<$0.FieldDescriptorProto>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'descriptor', subBuilder: $0.FieldDescriptorProto.create)
+    ..aOM<ApiFieldType>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'type', subBuilder: ApiFieldType.create)
   ;
 
   ApiFieldDescriptor._() : super();
   factory ApiFieldDescriptor({
     $core.String? comment,
     $0.FieldDescriptorProto? descriptor,
+    ApiFieldType? type,
   }) {
     final _result = create();
     if (comment != null) {
@@ -327,6 +329,9 @@ class ApiFieldDescriptor extends $pb.GeneratedMessage {
     }
     if (descriptor != null) {
       _result.descriptor = descriptor;
+    }
+    if (type != null) {
+      _result.type = type;
     }
     return _result;
   }
@@ -370,6 +375,237 @@ class ApiFieldDescriptor extends $pb.GeneratedMessage {
   void clearDescriptor() => clearField(2);
   @$pb.TagNumber(2)
   $0.FieldDescriptorProto ensureDescriptor() => $_ensure(1);
+
+  @$pb.TagNumber(3)
+  ApiFieldType get type => $_getN(2);
+  @$pb.TagNumber(3)
+  set type(ApiFieldType v) { setField(3, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasType() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearType() => clearField(3);
+  @$pb.TagNumber(3)
+  ApiFieldType ensureType() => $_ensure(2);
+}
+
+class ApiFieldType_BasicType extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiFieldType.BasicType', createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'type', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'typeName')
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'isRepeated')
+    ..hasRequiredFields = false
+  ;
+
+  ApiFieldType_BasicType._() : super();
+  factory ApiFieldType_BasicType({
+    $core.int? type,
+    $core.String? typeName,
+    $core.bool? isRepeated,
+  }) {
+    final _result = create();
+    if (type != null) {
+      _result.type = type;
+    }
+    if (typeName != null) {
+      _result.typeName = typeName;
+    }
+    if (isRepeated != null) {
+      _result.isRepeated = isRepeated;
+    }
+    return _result;
+  }
+  factory ApiFieldType_BasicType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ApiFieldType_BasicType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ApiFieldType_BasicType clone() => ApiFieldType_BasicType()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ApiFieldType_BasicType copyWith(void Function(ApiFieldType_BasicType) updates) => super.copyWith((message) => updates(message as ApiFieldType_BasicType)) as ApiFieldType_BasicType; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ApiFieldType_BasicType create() => ApiFieldType_BasicType._();
+  ApiFieldType_BasicType createEmptyInstance() => create();
+  static $pb.PbList<ApiFieldType_BasicType> createRepeated() => $pb.PbList<ApiFieldType_BasicType>();
+  @$core.pragma('dart2js:noInline')
+  static ApiFieldType_BasicType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ApiFieldType_BasicType>(create);
+  static ApiFieldType_BasicType? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get type => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set type($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearType() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get typeName => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set typeName($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTypeName() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTypeName() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get isRepeated => $_getBF(2);
+  @$pb.TagNumber(3)
+  set isRepeated($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasIsRepeated() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearIsRepeated() => clearField(3);
+}
+
+enum ApiFieldType_Type {
+  basicType, 
+  mapType, 
+  notSet
+}
+
+class ApiFieldType extends $pb.GeneratedMessage {
+  static const $core.Map<$core.int, ApiFieldType_Type> _ApiFieldType_TypeByTag = {
+    1 : ApiFieldType_Type.basicType,
+    2 : ApiFieldType_Type.mapType,
+    0 : ApiFieldType_Type.notSet
+  };
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiFieldType', createEmptyInstance: create)
+    ..oo(0, [1, 2])
+    ..aOM<ApiFieldType_BasicType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'basicType', subBuilder: ApiFieldType_BasicType.create)
+    ..aOM<ApiMapType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'mapType', subBuilder: ApiMapType.create)
+    ..hasRequiredFields = false
+  ;
+
+  ApiFieldType._() : super();
+  factory ApiFieldType({
+    ApiFieldType_BasicType? basicType,
+    ApiMapType? mapType,
+  }) {
+    final _result = create();
+    if (basicType != null) {
+      _result.basicType = basicType;
+    }
+    if (mapType != null) {
+      _result.mapType = mapType;
+    }
+    return _result;
+  }
+  factory ApiFieldType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ApiFieldType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ApiFieldType clone() => ApiFieldType()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ApiFieldType copyWith(void Function(ApiFieldType) updates) => super.copyWith((message) => updates(message as ApiFieldType)) as ApiFieldType; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ApiFieldType create() => ApiFieldType._();
+  ApiFieldType createEmptyInstance() => create();
+  static $pb.PbList<ApiFieldType> createRepeated() => $pb.PbList<ApiFieldType>();
+  @$core.pragma('dart2js:noInline')
+  static ApiFieldType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ApiFieldType>(create);
+  static ApiFieldType? _defaultInstance;
+
+  ApiFieldType_Type whichType() => _ApiFieldType_TypeByTag[$_whichOneof(0)]!;
+  void clearType() => clearField($_whichOneof(0));
+
+  @$pb.TagNumber(1)
+  ApiFieldType_BasicType get basicType => $_getN(0);
+  @$pb.TagNumber(1)
+  set basicType(ApiFieldType_BasicType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasBasicType() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearBasicType() => clearField(1);
+  @$pb.TagNumber(1)
+  ApiFieldType_BasicType ensureBasicType() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  ApiMapType get mapType => $_getN(1);
+  @$pb.TagNumber(2)
+  set mapType(ApiMapType v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMapType() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMapType() => clearField(2);
+  @$pb.TagNumber(2)
+  ApiMapType ensureMapType() => $_ensure(1);
+}
+
+class ApiMapType extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ApiMapType', createEmptyInstance: create)
+    ..aOM<ApiFieldType>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'key', subBuilder: ApiFieldType.create)
+    ..aOM<ApiFieldType>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'value', subBuilder: ApiFieldType.create)
+    ..hasRequiredFields = false
+  ;
+
+  ApiMapType._() : super();
+  factory ApiMapType({
+    ApiFieldType? key,
+    ApiFieldType? value,
+  }) {
+    final _result = create();
+    if (key != null) {
+      _result.key = key;
+    }
+    if (value != null) {
+      _result.value = value;
+    }
+    return _result;
+  }
+  factory ApiMapType.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ApiMapType.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ApiMapType clone() => ApiMapType()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ApiMapType copyWith(void Function(ApiMapType) updates) => super.copyWith((message) => updates(message as ApiMapType)) as ApiMapType; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ApiMapType create() => ApiMapType._();
+  ApiMapType createEmptyInstance() => create();
+  static $pb.PbList<ApiMapType> createRepeated() => $pb.PbList<ApiMapType>();
+  @$core.pragma('dart2js:noInline')
+  static ApiMapType getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ApiMapType>(create);
+  static ApiMapType? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  ApiFieldType get key => $_getN(0);
+  @$pb.TagNumber(1)
+  set key(ApiFieldType v) { setField(1, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasKey() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearKey() => clearField(1);
+  @$pb.TagNumber(1)
+  ApiFieldType ensureKey() => $_ensure(0);
+
+  @$pb.TagNumber(2)
+  ApiFieldType get value => $_getN(1);
+  @$pb.TagNumber(2)
+  set value(ApiFieldType v) { setField(2, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasValue() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearValue() => clearField(2);
+  @$pb.TagNumber(2)
+  ApiFieldType ensureValue() => $_ensure(1);
 }
 
 class ApiEnumDescriptor extends $pb.GeneratedMessage {

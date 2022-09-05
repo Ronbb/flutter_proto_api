@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_proto_api/bloc/api_bloc.dart';
 import 'package:flutter_proto_api/widgets/api_card.dart';
-import 'package:flutter_proto_api/widgets/sliver_service_header.dart';
 
 void main() {
   runApp(const App());
@@ -18,12 +17,15 @@ class App extends StatelessWidget {
         create: (context) => GlobalBloc(context.read()),
         child: MaterialApp(
           title: 'Proto Api',
-          // darkTheme: ThemeData(
-          //   brightness: Brightness.dark,
-          //   useMaterial3: true,
-          //   colorSchemeSeed: Colors.blue,
-          //   dividerColor: Colors.transparent,
-          // ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            useMaterial3: true,
+            colorSchemeSeed: Colors.blue,
+            dividerColor: Colors.transparent,
+            expansionTileTheme: const ExpansionTileThemeData(
+              childrenPadding: EdgeInsets.only(left: 24.0),
+            ),
+          ),
           theme: ThemeData(
             useMaterial3: true,
             colorSchemeSeed: Colors.blue,
@@ -31,6 +33,9 @@ class App extends StatelessWidget {
               labelStyle: TextStyle(color: Colors.white),
             ),
             dividerColor: Colors.transparent,
+            expansionTileTheme: const ExpansionTileThemeData(
+              childrenPadding: EdgeInsets.only(left: 24.0),
+            ),
           ),
           home: const HomePage(),
         ),
@@ -46,47 +51,28 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final global = context.read<GlobalBloc>();
 
-    final theme = Theme.of(context);
+    final entries = global.services.entries.toList();
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          const SliverAppBar(
-            title: Text('Proto Api'),
-          ),
-          for (final entry in global.services.entries) ...[
-            SliverPersistentHeader(
-              delegate: SliverServiceHeader(
-                title: Text(entry.key),
-              ),
-            ),
-            SliverPadding(
-              padding: const EdgeInsets.symmetric(
-                vertical: 4.0,
-                horizontal: 16.0,
-              ),
-              sliver: SliverToBoxAdapter(
-                child: Text(
-                  entry.value.service.comment.trim(),
-                  style: theme.textTheme.bodySmall?.copyWith(
-                    color: theme.hintColor,
-                  ),
+      appBar: AppBar(
+        title: const Text('Proto Api'),
+      ),
+      body: ListView.builder(
+        itemCount: entries.length,
+        itemBuilder: (context, index) {
+          final entry = entries[index];
+          return ServiceTile(
+            name: entry.key,
+            comment: entry.value.service.comment.trim(),
+            apis: [
+              for (final api in entry.value.apis)
+                BlocProvider.value(
+                  value: api,
+                  child: const ApiCard(),
                 ),
-              ),
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  for (final api in entry.value.apis)
-                    BlocProvider.value(
-                      value: api,
-                      child: const ApiCard(),
-                    ),
-                ],
-              ),
-            ),
-          ],
-        ],
+            ],
+          );
+        },
       ),
     );
   }

@@ -84,6 +84,36 @@ message ApiFieldDescriptor {
   string comment = 1;
   //
   google.protobuf.FieldDescriptorProto descriptor = 2;
+  //
+  ApiFieldType type = 3;
+}
+
+//
+message ApiFieldType {
+  //
+  oneof type {
+    //
+    BasicType basic_type = 1;
+    //
+    ApiMapType map_type = 2;
+  }
+
+  message BasicType {
+    //
+    int32 type = 1;
+    //
+    string type_name = 2;
+    //
+    bool is_repeated = 3;
+  }
+}
+
+//
+message ApiMapType {
+  //
+  ApiFieldType key = 1;
+  //
+  ApiFieldType value = 2;
 }
 
 //

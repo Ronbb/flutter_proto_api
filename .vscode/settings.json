@@ -8,6 +8,8 @@
     "pbserver",
     "protobuf",
     "Schyler",
+    "SFIXED",
+    "SINT",
     "writeln"
   ],
   "protoc": {
