@@ -1,10 +1,11 @@
 import 'dart:io' hide BytesBuilder;
 import 'dart:typed_data' show BytesBuilder;
 
-import 'package:proto/proto.dart';
+import 'package:proto/plugin.dart';
 import 'package:protoc_api/src/generator_context.dart';
 
-export 'package:proto/proto.dart';
+export 'package:proto/plugin.dart';
+export 'package:proto/utils.dart';
 export 'package:protoc_api/src/generator_context.dart';
 
 abstract class Generator {

@@ -10,7 +10,7 @@ import 'dart:core' as $core;
 import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'google/protobuf/struct.pb.dart' as $0;
+import 'struct.pb.dart' as $0;
 
 class OpenApiV2_Info extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'OpenApiV2.Info', createEmptyInstance: create)
@@ -1766,7 +1766,7 @@ class OpenApiV2_Schema extends $pb.GeneratedMessage {
     ..pc<OpenApiV2_Schema>(27, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'items', $pb.PbFieldType.PM, subBuilder: OpenApiV2_Schema.create)
     ..pc<OpenApiV2_Schema>(28, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'all_of', $pb.PbFieldType.PM, protoName: 'all_ofs', subBuilder: OpenApiV2_Schema.create)
     ..m<$core.String, OpenApiV2_Schema>(29, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'properties', entryClassName: 'OpenApiV2.Schema.PropertiesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: OpenApiV2_Schema.create)
-    ..m<$core.String, OpenApiV2_Schema>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'additionalProperties', entryClassName: 'OpenApiV2.Schema.AdditionalPropertiesEntry', keyFieldType: $pb.PbFieldType.OS, valueFieldType: $pb.PbFieldType.OM, valueCreator: OpenApiV2_Schema.create)
+    ..aOM<OpenApiV2_Schema>(30, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'additionalProperties', subBuilder: OpenApiV2_Schema.create)
     ..hasRequiredFields = false
   ;
 
@@ -1801,7 +1801,7 @@ class OpenApiV2_Schema extends $pb.GeneratedMessage {
     $core.Iterable<OpenApiV2_Schema>? items,
     $core.Iterable<OpenApiV2_Schema>? allOfs,
     $core.Map<$core.String, OpenApiV2_Schema>? properties,
-    $core.Map<$core.String, OpenApiV2_Schema>? additionalProperties,
+    OpenApiV2_Schema? additionalProperties,
   }) {
     final _result = create();
     if (discriminator != null) {
@@ -1892,7 +1892,7 @@ class OpenApiV2_Schema extends $pb.GeneratedMessage {
       _result.properties.addAll(properties);
     }
     if (additionalProperties != null) {
-      _result.additionalProperties.addAll(additionalProperties);
+      _result.additionalProperties = additionalProperties;
     }
     return _result;
   }
@@ -2163,7 +2163,15 @@ class OpenApiV2_Schema extends $pb.GeneratedMessage {
   $core.Map<$core.String, OpenApiV2_Schema> get properties => $_getMap(28);
 
   @$pb.TagNumber(30)
-  $core.Map<$core.String, OpenApiV2_Schema> get additionalProperties => $_getMap(29);
+  OpenApiV2_Schema get additionalProperties => $_getN(29);
+  @$pb.TagNumber(30)
+  set additionalProperties(OpenApiV2_Schema v) { setField(30, v); }
+  @$pb.TagNumber(30)
+  $core.bool hasAdditionalProperties() => $_has(29);
+  @$pb.TagNumber(30)
+  void clearAdditionalProperties() => clearField(30);
+  @$pb.TagNumber(30)
+  OpenApiV2_Schema ensureAdditionalProperties() => $_ensure(29);
 }
 
 class OpenApiV2_Xml extends $pb.GeneratedMessage {

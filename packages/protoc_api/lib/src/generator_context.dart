@@ -80,6 +80,20 @@ abstract class Context {
 
     throw Exception('unreachable');
   }
+
+  GeneratorContext get generator {
+    Context? context = this;
+
+    while (context != null) {
+      if (context is GeneratorContext) {
+        return context;
+      }
+
+      context = context.parent;
+    }
+
+    throw Exception('unreachable');
+  }
 }
 
 class ServiceContext extends Context {
@@ -109,6 +123,9 @@ class ServiceContext extends Context {
   static const kNameFieldNumber = 1;
   static const kOptionsFieldNumber = 3;
 
+  ServiceConfig get config =>
+      descriptor.options.getExtension(Annotations.service);
+
   @override
   final FileContext parent;
 
@@ -135,6 +152,8 @@ class MethodContext extends Context {
   bool get isClientStreaming => descriptor.clientStreaming;
 
   bool get isServerStreaming => descriptor.serverStreaming;
+
+  ApiConfig get config => descriptor.options.getExtension(Annotations.api);
 
   @override
   final ServiceContext parent;
@@ -307,6 +326,47 @@ class FieldContext extends Context {
   });
 
   final FieldDescriptorProto descriptor;
+
+  static ApiFieldType _buildType(
+    Map<String, MessageContext> messages,
+    FieldDescriptorProto descriptor,
+  ) {
+    final type = ApiFieldType(
+      basicType: ApiFieldType_BasicType(
+        type: descriptor.type.value,
+        typeName: descriptor.typeName,
+        isRepeated:
+            descriptor.label == FieldDescriptorProto_Label.LABEL_REPEATED,
+      ),
+    );
+    if (descriptor.type == FieldDescriptorProto_Type.TYPE_MESSAGE &&
+        descriptor.label == FieldDescriptorProto_Label.LABEL_REPEATED) {
+      final messageContext = messages[descriptor.typeName];
+      if (messageContext == null) {
+        throw Exception('Message ${descriptor.typeName} not found');
+      }
+      if (messageContext.descriptor.options.mapEntry) {
+        type.mapType = ApiMapType(
+          key: _buildType(
+            messages,
+            messageContext.descriptor.field[0],
+          ),
+          value: _buildType(
+            messages,
+            messageContext.descriptor.field[1],
+          ),
+        );
+      }
+    }
+
+    return type;
+  }
+
+  /// [messages] is used for performance optimization or external messages.
+  ApiFieldType buildType([Map<String, MessageContext>? messages]) {
+    messages ??= generator.messages;
+    return _buildType(messages, descriptor);
+  }
 
   @override
   final MessageContext parent;

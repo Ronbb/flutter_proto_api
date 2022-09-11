@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "google/protobuf/struct.proto";
+import "struct.proto";
 
 message OpenApiV2 {
   string swagger = 1;
@@ -199,7 +199,7 @@ message OpenApiV2 {
     repeated Schema items = 27;
     repeated Schema all_ofs = 28 [ json_name = "all_of" ];
     map<string, Schema> properties = 29;
-    map<string, Schema> additional_properties = 30;
+    Schema additional_properties = 30;
   }
 
   message Xml {

@@ -18,8 +18,10 @@
     "options": [
       "--proto_path=${workspaceRoot}/proto",
       "--plugin=protoc-gen-dart-api=${workspaceRoot}/packages/protoc_api/bin/protoc-gen-dart-api",
+      "--plugin=protoc-gen-open-api-v2=${workspaceRoot}/packages/protoc_api/bin/protoc-gen-open-api-v2",
       "--dart-api_out=${workspaceRoot}/packages/proto/lib/src",
-      "--dart_out=${workspaceRoot}/packages/proto/lib/src"
+      "--dart_out=${workspaceRoot}/packages/proto/lib/src",
+      "--open-api-v2_out=${workspaceRoot}/packages/proto/lib/src"
     ]
   }
 }
