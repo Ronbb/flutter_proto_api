@@ -1,0 +1,232 @@
+syntax = "proto3";
+
+import "google/protobuf/struct.proto";
+
+message OpenApiV2 {
+  string swagger = 1;
+  Info info = 2;
+  string host = 3;
+  string base_path = 4;
+  repeated string schemes = 5;
+  repeated string consumes = 6;
+  repeated string produces = 7;
+  map<string, Path> paths = 8;
+  map<string, Schema> definitions = 9;
+  repeated Parameter parameters = 10;
+  map<string, Response> responses = 11;
+  map<string, SecuritySchema> security_definitions = 12;
+  // list -> Array<string>
+  map<string, google.protobuf.ListValue> securities = 13
+      [ json_name = "security" ];
+  repeated Tag tags = 14;
+  ExternalDocumentation external_docs = 15;
+
+  message Info {
+    string title = 1;
+    string description = 2;
+    string terms_of_service = 3;
+    Contact contact = 4;
+    License license = 5;
+    string version = 6;
+  }
+
+  message Contact {
+    string name = 1;
+    string url = 2;
+    string email = 3;
+  }
+
+  message License {
+    string name = 1;
+    string url = 2;
+  }
+
+  message Path {
+    string ref = 1 [ json_name = "$ref" ];
+    Operation get = 2;
+    Operation put = 3;
+    Operation post = 4;
+    Operation delete = 5;
+    Operation options = 6;
+    Operation head = 7;
+    Operation patch = 8;
+    repeated Parameter parameters = 9;
+  }
+
+  message Operation {
+    repeated string tags = 1;
+    string summary = 2;
+    string description = 3;
+    ExternalDocumentation external_docs = 4;
+    string operation_id = 5;
+    repeated string consumes = 6;
+    repeated string produces = 7;
+    repeated Parameter parameters = 8;
+    map<string, Response> responses = 9;
+    repeated string schemes = 10;
+    bool deprecated = 11;
+    // list -> Array<string>
+    map<string, google.protobuf.ListValue> securities = 12
+        [ json_name = "security" ];
+  }
+
+  message ExternalDocumentation {
+    string description = 1;
+    string url = 2;
+  }
+
+  message Parameter {
+    string name = 1;
+    string in = 2;
+    string description = 3;
+    bool required = 4;
+    // in -> body
+    Schema schema = 5;
+    // in -> other than body
+    // string, number, integer, boolean, array or file
+    string type = 6;
+    string format = 7;
+    bool allow_empty_value = 8;
+    // type -> array
+    Items items = 9;
+    // csv, ssv, tsv, pipes, multi(in query or formData)
+    string collection_format = 10;
+    google.protobuf.Value default = 11;
+    double maximum = 12;
+    bool exclusive_maximum = 13;
+    double minimum = 14;
+    bool exclusive_minimum = 15;
+    int64 max_length = 16;
+    int64 min_length = 17;
+    string pattern = 18;
+    int64 max_items = 19;
+    int64 min_items = 20;
+    bool unique_items = 21;
+    repeated google.protobuf.Value enums = 22 [ json_name = "enum" ];
+    int64 multiple_of = 23;
+
+    // Parameter sometimes use for Reference
+    string ref = 24 [ json_name = "$ref" ];
+  }
+
+  message Items {
+    // string, number, integer, boolean, array
+    string type = 1;
+    string format = 2;
+    // type -> array
+    Items items = 3;
+    // csv, ssv, tsv, pipes, multi(in query or formData)
+    string collection_format = 4;
+    google.protobuf.Value default = 5;
+    double maximum = 6;
+    bool exclusive_maximum = 7;
+    double minimum = 8;
+    bool exclusive_minimum = 9;
+    int64 max_length = 10;
+    int64 min_length = 11;
+    string pattern = 12;
+    int64 max_items = 13;
+    int64 min_items = 14;
+    bool unique_items = 15;
+    repeated google.protobuf.Value enums = 16 [ json_name = "enum" ];
+    int64 multiple_of = 17;
+  }
+
+  message Response {
+    string description = 1;
+    Schema schema = 2;
+    map<string, Header> headers = 3;
+    map<string, google.protobuf.Value> examples = 4;
+  }
+
+  message Header {
+    string description = 1;
+    // string, number, integer, boolean, array
+    string type = 2;
+    string format = 3;
+    // type -> array
+    Items items = 4;
+    // csv, ssv, tsv, pipes, multi(in query or formData)
+    string collection_format = 5;
+    google.protobuf.Value default = 6;
+    double maximum = 7;
+    bool exclusive_maximum = 8;
+    double minimum = 9;
+    bool exclusive_minimum = 10;
+    int64 max_length = 11;
+    int64 min_length = 12;
+    string pattern = 13;
+    int64 max_items = 14;
+    int64 min_items = 15;
+    bool unique_items = 16;
+    repeated google.protobuf.Value enums = 17 [ json_name = "enum" ];
+    int64 multiple_of = 18;
+  }
+
+  message Tag {
+    string name = 1;
+    string description = 2;
+    ExternalDocumentation external_docs = 3;
+  }
+
+  message Schema {
+    string discriminator = 1;
+    bool read_only = 2;
+    Xml xml = 3;
+    ExternalDocumentation external_docs = 4;
+    google.protobuf.Value example = 5;
+    string ref = 6 [ json_name = "$ref" ];
+    string format = 7;
+    string title = 8;
+    string description = 9;
+    google.protobuf.Value default = 10;
+    uint64 multiple_of = 11;
+    double maximum = 12;
+    bool exclusive_maximum = 13;
+    double minimum = 14;
+    bool exclusive_minimum = 15;
+    int64 max_length = 16;
+    int64 min_length = 17;
+    string pattern = 18;
+    int64 max_items = 19;
+    int64 min_items = 20;
+    bool unique_items = 21;
+    int64 max_properties = 22;
+    int64 min_properties = 23;
+    bool required = 24;
+    repeated google.protobuf.Value enums = 25 [ json_name = "enum" ];
+    string type = 26;
+    repeated Schema items = 27;
+    repeated Schema all_ofs = 28 [ json_name = "all_of" ];
+    map<string, Schema> properties = 29;
+    map<string, Schema> additional_properties = 30;
+  }
+
+  message Xml {
+    string name = 1;
+    string namespace = 2;
+    string prefix = 3;
+    bool attribute = 4;
+    bool wrapped = 5;
+  }
+
+  message SecuritySchema {
+    // basic, apiKey or oauth2
+    string type = 1;
+    string description = 2;
+    // type -> apiKey
+    string name = 3;
+    // type -> apiKey
+    // query or header
+    string in = 4;
+    // type -> oauth2
+    // implicit, password, application or accessCode
+    string flow = 5;
+    // type -> oauth2
+    string authorization_url = 6;
+    // type -> oauth2
+    string token_url = 7;
+    // type -> oauth2
+    map<string, string> scopes = 8;
+  }
+}

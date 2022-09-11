@@ -1,46 +1,20 @@
 import 'dart:convert';
-import 'dart:io' hide BytesBuilder;
-import 'dart:typed_data' show BytesBuilder;
 
-import 'package:proto/proto.dart';
-import 'package:protoc_api/src/generator_context.dart';
+import 'package:protoc_api/src/generator.dart';
 
-class CodeGenerator {
-  CodeGenerator(this.input, this.output) {
-    Annotations.registerAllExtensions(registry);
-  }
+class CodeGenerator extends Generator {
+  CodeGenerator({required super.input, required super.output});
 
-  final Stream<List<int>> input;
-  final IOSink output;
-  final context = GeneratorContext();
-  final registry = ExtensionRegistry();
-
-  Future<void> generate() async {
-    final request = CodeGeneratorRequest();
+  @override
+  Future<CodeGeneratorResponse> doGenerate(CodeGeneratorRequest request) async {
     final response = CodeGeneratorResponse();
-
-    // read request
-    final bytes = await input
-        .fold(BytesBuilder(), (builder, data) => builder..add(data))
-        .then((builder) => builder.takeBytes());
-    final reader = CodedBufferReader(bytes, sizeLimit: bytes.length);
-    request.mergeFromCodedBufferReader(reader, registry);
-    reader.checkLastTagWas(0);
-
-    // options
-    // no options yet
-
-    // generate
-    for (final file in request.protoFile) {
-      context.addFile(file);
-    }
-
     response.file.add(_createLogFile());
     response.file.addAll(_createApiRepositoryFiles());
     response.supportedFeatures = Int64(
       CodeGeneratorResponse_Feature.FEATURE_PROTO3_OPTIONAL.value,
     );
-    output.add(response.writeToBuffer());
+
+    return response;
   }
 
   Iterable<CodeGeneratorResponse_File> _createApiRepositoryFiles() sync* {

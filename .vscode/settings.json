@@ -10,13 +10,14 @@
     "Schyler",
     "SFIXED",
     "SINT",
+    "struct",
     "writeln"
   ],
   "protoc": {
     "compile_on_save": true,
     "options": [
       "--proto_path=${workspaceRoot}/proto",
-      "--plugin=protoc-gen-dart-api=${workspaceRoot}/packages/protoc_api/bin/protoc-gen-dart-api.bat",
+      "--plugin=protoc-gen-dart-api=${workspaceRoot}/packages/protoc_api/bin/protoc-gen-dart-api",
       "--dart-api_out=${workspaceRoot}/packages/proto/lib/src",
       "--dart_out=${workspaceRoot}/packages/proto/lib/src"
     ]
